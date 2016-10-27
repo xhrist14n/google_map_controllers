@@ -1,16 +1,19 @@
 function MakeControl(controlDiv, label) {
 
-  // Set up the control border.
-  var controlUI = document.createElement('div');
-  controlUI.title = label;
-  controlUI.className = 'controlUI';
-  controlDiv.appendChild(controlUI);
+  $.get(
+    "tpls/partials/controls.html",
+    function(html){
+      var controlUI = document.createElement('div');
+      controlUI.title = label;
+      controlUI.className = 'controlUI';
+      controlDiv.appendChild(controlUI);
+      var controlText = document.createElement('div');
+      controlText.innerHTML = html;
+      controlText.className = 'controlText';
+      controlUI.appendChild(controlText);
+    }
+  );
 
-  // Set up the inner control.
-  var controlText = document.createElement('div');
-  controlText.innerHTML = label;
-  controlText.className = 'controlText';
-  controlUI.appendChild(controlText);
 }
 
 function initialize() {
@@ -29,7 +32,7 @@ function initialize() {
     var newDiv = new MakeControl(divName, divLabel);
     map.controls[google.maps.ControlPosition.LEFT_CENTER].push(divName);
 
-    $("#center-control").addClass("text-orientation-vertical");
+
 
 }
 
